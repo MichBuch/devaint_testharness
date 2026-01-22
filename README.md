@@ -53,7 +53,7 @@ npm run dev
 npm run dev
 ```
 
-Visit `http://localhost:3000` to see the test harness UI.
+Visit `http://localhost:3011` to see the test harness UI.
 
 ## Features
 
