@@ -1,0 +1,18 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "AWS_ACCESS_KEY_ID": "@aws_access_key_id",
+    "AWS_SECRET_ACCESS_KEY": "@aws_secret_access_key",
+    "AWS_REGION": "@aws_region",
+    "AWS_S3_BUCKET": "@aws_s3_bucket",
+    "AZURE_STORAGE_CONNECTION_STRING": "@azure_storage_connection_string",
+    "AZURE_CONTAINER_NAME": "@azure_container_name",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "WEATHER_API_KEY": "@weather_api_key"
+  }
+}

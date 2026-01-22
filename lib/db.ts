@@ -1,6 +1,24 @@
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL!);
+let sqlInstance: ReturnType<typeof neon> | null = null;
+
+function getSql() {
+  if (!sqlInstance) {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    sqlInstance = neon(process.env.DATABASE_URL);
+  }
+  return sqlInstance;
+}
+
+export const sql = new Proxy({} as ReturnType<typeof neon>, {
+  get(_target, prop) {
+    const instance = getSql();
+    const value = (instance as any)[prop];
+    return typeof value === 'function' ? value.bind(instance) : value;
+  },
+});
 
 export interface TestLog {
   id?: number;
@@ -32,7 +50,7 @@ export async function logTest(testLog: Omit<TestLog, 'id' | 'timestamp'>) {
     VALUES (${testLog.service}, ${testLog.action}, ${testLog.status}, ${testLog.message}, ${JSON.stringify(testLog.metadata || {})})
     RETURNING *
   `;
-  return result[0];
+  return (result as any)[0] as TestLog;
 }
 
 export async function getTestLogs(limit = 50) {

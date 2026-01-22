@@ -126,6 +126,17 @@ export default function Home() {
           onAction={handleAction}
           loading={loading}
         />
+
+        <ServiceCard
+          title="Git"
+          actions={[
+            { name: 'Status', endpoint: 'git/status' },
+            { name: 'Recent Logs', endpoint: 'git/log' },
+            { name: 'Current Branch', endpoint: 'git/branch' },
+          ]}
+          onAction={handleAction}
+          loading={loading}
+        />
       </div>
 
       <LogsPanel logs={logs} onRefresh={fetchLogs} />

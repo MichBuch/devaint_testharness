@@ -22,10 +22,11 @@ export async function testNeonDB(action: string) {
         const result = await sql`
           SELECT COUNT(*) as count FROM test_logs
         `;
+        const count = (result as any)[0]?.count || 0;
         return {
           success: true,
-          message: `Query executed successfully. Found ${result[0]?.count || 0} log entries`,
-          metadata: { count: result[0]?.count },
+          message: `Query executed successfully. Found ${count} log entries`,
+          metadata: { count },
         };
       } catch (error: any) {
         return {

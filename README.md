@@ -57,10 +57,13 @@ Visit `http://localhost:3000` to see the test harness UI.
 
 ## Features
 
-- **Service Testing**: Test buttons for each integrated service
+- **Service Testing**: Test buttons for each integrated service (Neon DB, AWS, Azure, Stripe, MCP, Git, External APIs)
 - **Real-time Logging**: View test results and logs in real-time
 - **Error Handling**: Graceful error handling with detailed messages
 - **Metadata Tracking**: Store and display test metadata
+- **Health Check**: `/api/health` endpoint for monitoring
+- **Statistics API**: `/api/stats` for test analytics
+- **Git Integration**: Test git operations (status, log, branch)
 
 ## Deployment
 
@@ -75,10 +78,35 @@ Visit `http://localhost:3000` to see the test harness UI.
 
 Configure environment variables in your hosting platform's settings.
 
+## API Endpoints
+
+- `GET /api/health` - Health check endpoint
+- `GET /api/logs` - Retrieve test logs
+- `GET /api/stats` - Get test statistics
+- `POST /api/init-db` - Initialize database
+- `POST /api/test/[service]/[action]` - Execute service test
+
 ## Development
 
 The app structure:
 - `app/` - Next.js app directory
 - `components/` - React components
 - `lib/` - Utilities and service integrations
+- `lib/services/` - Service-specific test implementations
 - `app/api/` - API routes
+
+## CI/CD
+
+GitHub Actions workflow included for:
+- Linting
+- Building
+- Automated testing
+
+See `.github/workflows/ci.yml`
+
+## Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions for:
+- Vercel
+- Azure App Service
+- AWS Amplify/Elastic Beanstalk

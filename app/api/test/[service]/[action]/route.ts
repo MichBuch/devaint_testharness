@@ -6,6 +6,7 @@ import { testAzure } from '@/lib/services/azure';
 import { testStripe } from '@/lib/services/stripe';
 import { testMCP } from '@/lib/services/mcp';
 import { testExternalAPI } from '@/lib/services/external';
+import { testGit } from '@/lib/services/git';
 
 export async function POST(
   request: NextRequest,
@@ -37,6 +38,9 @@ export async function POST(
         break;
       case 'api':
         result = await testExternalAPI(action);
+        break;
+      case 'git':
+        result = await testGit(action);
         break;
       default:
         result = { success: false, message: `Unknown service: ${service}` };
